@@ -10,7 +10,12 @@ import {
   loadSections,
   loadCSS,
   buildBlock,
+  getMetadata,
+  toClassName,
 } from './aem.js';
+
+/** Templates that ship their own stylesheet in /styles/templates/ */
+const TEMPLATES_WITH_STYLES = ['faq'];
 
 if (window.trustedTypes && window.trustedTypes.createPolicy) {
   const innerTT = window.trustedTypes.createPolicy('tt-inner', {
@@ -46,6 +51,16 @@ async function loadFonts() {
     if (!window.location.hostname.includes('localhost')) sessionStorage.setItem('fonts-loaded', 'true');
   } catch (e) {
     // do nothing
+  }
+}
+
+/**
+ * Loads the stylesheet of the page template, if it has one.
+ */
+async function loadTemplateStyles() {
+  const template = toClassName(getMetadata('template'));
+  if (TEMPLATES_WITH_STYLES.includes(template)) {
+    await loadCSS(`${window.hlx.codeBasePath}/styles/templates/${template}.css`);
   }
 }
 
@@ -162,9 +177,11 @@ export function decorateMain(main) {
 async function loadEager(doc) {
   document.documentElement.lang = 'en';
   decorateTemplateAndTheme();
+  const templateStyles = loadTemplateStyles();
   const main = doc.querySelector('main');
   if (main) {
     decorateMain(main);
+    await templateStyles;
     document.body.classList.add('appear');
     await loadSection(main.querySelector('.section'), waitForFirstImage);
   }

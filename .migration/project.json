@@ -1,0 +1,10 @@
+{
+  "type": "da",
+  "sites": {
+    "sri-eds-0803": {
+      "previewOrg": "sricharan-l",
+      "previewSite": "sri-eds-0803",
+      "libraryUrl": "https://main--sta-boilerplate--aemdemos.aem.page/tools/sidekick/library.json"
+    }
+  }
+}

@@ -1,0 +1,112 @@
+/* WKND FAQ template: brand tokens, default content and page layout.
+ * Loaded only on pages with metadata `template: faq`. */
+@import url('https://fonts.googleapis.com/css2?family=Asar&family=Source+Sans+Pro:wght@400;600&display=swap');
+
+body.faq {
+  --wknd-heading-font-family: asar, georgia, 'Times New Roman', times, serif;
+  --wknd-body-font-family: 'Source Sans Pro', 'Helvetica Neue', helvetica, arial, sans-serif;
+  --wknd-text-color: #202020;
+  --wknd-link-color: #0045ff;
+  --wknd-accent-color: #ffea00;
+  --wknd-divider-color: #ebebeb;
+  --wknd-content-width: 748px;
+  --wknd-sidebar-width: 291px;
+  --wknd-column-gap: 111px;
+
+  color: var(--wknd-text-color);
+  font-family: var(--wknd-body-font-family);
+  font-size: 18px;
+  line-height: 27px;
+}
+
+body.faq main h1,
+body.faq main h2,
+body.faq main h3,
+body.faq main h4,
+body.faq main h5,
+body.faq main h6 {
+  color: var(--wknd-text-color);
+  font-family: var(--wknd-heading-font-family);
+  font-weight: 400;
+}
+
+body.faq main h3 {
+  margin: 27px 0 13.5px;
+  font-size: 24px;
+  line-height: 36px;
+}
+
+body.faq main p {
+  margin: 0 0 13.5px;
+}
+
+body.faq main a:any-link {
+  color: var(--wknd-link-color);
+  text-decoration: none;
+}
+
+body.faq main a:hover {
+  text-decoration: underline;
+}
+
+body.faq main {
+  padding-bottom: 48px;
+}
+
+/* sections: single column on mobile */
+body.faq main > .section {
+  margin: 0;
+}
+
+body.faq main > .section > div {
+  max-width: calc(var(--wknd-content-width) + 28px);
+  padding: 0 14px;
+}
+
+/* intro paragraph */
+body.faq main > .section > .default-content-wrapper p {
+  line-height: 45px;
+  text-align: justify;
+}
+
+/* contact help */
+body.faq main > .section:last-of-type > .default-content-wrapper p {
+  font-size: 14px;
+  line-height: 35px;
+}
+
+@media (width < 1200px) {
+  /* accordion runs edge to edge below desktop */
+  body.faq main .accordion-faq-wrapper {
+    margin: 0 -14px;
+  }
+}
+
+@media (width >= 1200px) {
+  /* two-column layout: content column left, contact help sidebar right */
+  body.faq main {
+    display: grid;
+    grid-template-columns: var(--wknd-content-width) var(--wknd-sidebar-width);
+    grid-auto-rows: min-content;
+    column-gap: var(--wknd-column-gap);
+    align-content: start;
+    box-sizing: border-box;
+    max-width: 1164px;
+    margin: 0 auto;
+    padding-left: 14px;
+  }
+
+  body.faq main > .section {
+    grid-column: 1;
+  }
+
+  body.faq main > .section > div {
+    max-width: none;
+    padding: 0;
+  }
+
+  body.faq main > .section:last-of-type {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+  }
+}

@@ -1,0 +1,75 @@
+/* Accordion (FAQ): stacked collapsible rows with divider lines and a right-aligned +/- icon. */
+.accordion-faq .accordion-faq-item-label {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 48.66px;
+  box-sizing: border-box;
+  padding: 13.33px 50px 13.33px 21px;
+  border-bottom: 2px solid var(--wknd-divider-color, #ebebeb);
+  color: #000;
+  font-family: var(--wknd-body-font-family, var(--body-font-family));
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+  text-transform: uppercase;
+  cursor: pointer;
+  list-style: none;
+}
+
+.accordion-faq .accordion-faq-item-label::-webkit-details-marker {
+  display: none;
+}
+
+.accordion-faq .accordion-faq-item-label:focus-visible {
+  outline: 2px solid var(--wknd-link-color, currentcolor);
+  outline-offset: -2px;
+}
+
+.accordion-faq .accordion-faq-item[open] .accordion-faq-item-label {
+  border-bottom-color: transparent;
+}
+
+/* plus icon: two bars, the vertical bar is hidden when open (becomes minus) */
+.accordion-faq .accordion-faq-item-label::before,
+.accordion-faq .accordion-faq-item-label::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 14px;
+  width: 21px;
+  height: 2px;
+  background-color: currentcolor;
+  transform: translateY(-50%);
+  transition: transform 0.2s;
+}
+
+.accordion-faq .accordion-faq-item-label::after {
+  transform: translateY(-50%) rotate(90deg);
+}
+
+.accordion-faq .accordion-faq-item[open] .accordion-faq-item-label::after {
+  transform: translateY(-50%) rotate(0deg);
+}
+
+.accordion-faq .accordion-faq-item-body {
+  padding: 7px 0 0 7px;
+  font-size: 14px;
+  line-height: 24.5px;
+  text-align: justify;
+}
+
+.accordion-faq .accordion-faq-item-body > :first-child {
+  margin-top: 0;
+}
+
+.accordion-faq .accordion-faq-item-body p {
+  margin: 0 0 13.5px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .accordion-faq .accordion-faq-item-label::before,
+  .accordion-faq .accordion-faq-item-label::after {
+    transition: none;
+  }
+}
